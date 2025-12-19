@@ -24,37 +24,36 @@
     }
     h1 {
       color: #ff8c00;
-      margin-bottom: 10px;
     }
     .price {
       font-size: 22px;
       color: #d84315;
-      margin: 10px 0;
       font-weight: bold;
+      margin: 10px 0;
     }
     .btn {
       display: block;
       text-align: center;
       background: #06c755;
       color: white;
-      text-decoration: none;
-      padding: 15px;
+      padding: 16px;
       border-radius: 10px;
       font-size: 18px;
       margin: 20px 0;
+      text-decoration: none;
+    }
+    .warning {
+      color: red;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
     .form-group {
       margin-bottom: 15px;
     }
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
     input, textarea {
       width: 100%;
       padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
       font-size: 16px;
     }
     .submit {
@@ -62,14 +61,9 @@
       color: white;
       border: none;
       width: 100%;
-      padding: 15px;
-      border-radius: 10px;
+      padding: 16px;
       font-size: 18px;
-    }
-    .note {
-      font-size: 14px;
-      color: #777;
-      margin-top: 10px;
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -77,70 +71,53 @@
 
 <div class="container">
 
-  <!-- 示意圖片（之後可換成你自己的） -->
   <img src="https://images.unsplash.com/photo-1591073113125-e46713c829ed" alt="愛文芒果">
 
   <div class="content">
     <h1>🍋 台南玉井 愛文芒果</h1>
-    <p>產地直送，新鮮現採，香甜多汁，夏天必吃。</p>
+    <p>產地直送，新鮮現採，香甜多汁。</p>
+    <div class="price">10 台斤 / NT$1200</div>
 
-    <div class="price">10 台斤／NT$ 1,200</div>
-
-    <!-- 直接加 LINE -->
-    <a class="btn" href="https://line.me/R/ti/p/~hihi1105love" target="_blank">
-      📲 直接加 LINE 下單
-    </a>
-
-    <h2>📝 快速訂購表單</h2>
+    <div class="warning">
+      ⚠️ 填完表單後<br>
+      👉 會跳到 LINE<br>
+      👉 請「再按一次送出」我們才會收到
+    </div>
 
     <form onsubmit="sendToLine(); return false;">
       <div class="form-group">
-        <label>姓名</label>
-        <input type="text" id="name" required>
+        <input id="name" placeholder="姓名" required>
       </div>
-
       <div class="form-group">
-        <label>電話</label>
-        <input type="tel" id="phone" required>
+        <input id="phone" placeholder="電話" required>
       </div>
-
       <div class="form-group">
-        <label>訂購數量（箱）</label>
-        <input type="number" id="qty" required>
+        <input id="qty" type="number" placeholder="訂購箱數" required>
       </div>
-
       <div class="form-group">
-        <label>備註</label>
-        <textarea id="note" rows="3"></textarea>
+        <textarea id="note" placeholder="備註（可不填）"></textarea>
       </div>
 
-      <button type="submit" class="submit">
-        送出訂單（跳轉 LINE）
+      <button class="submit" type="submit">
+        📲 跳到 LINE → 請按送出
       </button>
     </form>
 
-    <div class="note">
-      ※ 填完表單後，會自動跳到 LINE 與我們確認訂單
-    </div>
   </div>
 </div>
 
 <script>
 function sendToLine() {
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const qty = document.getElementById("qty").value;
-  const note = document.getElementById("note").value;
-
-  const message =
+  const msg =
 `我要訂購【台南愛文芒果】
-姓名：${name}
-電話：${phone}
-數量：${qty} 箱
-備註：${note}`;
+姓名：${name.value}
+電話：${phone.value}
+數量：${qty.value} 箱
+備註：${note.value || "無"}`;
 
-  const url = "https://line.me/R/ti/p/~hihi1105love?text=" + encodeURIComponent(message);
-  window.open(url, "_blank");
+  location.href =
+    "https://line.me/R/ti/p/~hihi1105love?text=" +
+    encodeURIComponent(msg);
 }
 </script>
 
